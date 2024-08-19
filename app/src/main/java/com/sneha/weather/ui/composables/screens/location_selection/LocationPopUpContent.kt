@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.constraintlayout.compose.Visibility
 import com.google.android.gms.maps.model.LatLng
 import com.sneha.weather.R
 import com.sneha.weather.data.models.WeatherInfoModel
@@ -60,8 +61,18 @@ fun LocationPopUpContent(
             overflow = TextOverflow.Ellipsis,
             color = Color.Black
         )
+        val regionText =
+            if (weatherInfoModel.region.isEmpty() && weatherInfoModel.country.isEmpty()) {
+                "${weatherInfoModel.region}, ${weatherInfoModel.country}"
+            } else if (weatherInfoModel.region.isEmpty()) {
+                weatherInfoModel.region
+            } else if (weatherInfoModel.country.isEmpty()) {
+                weatherInfoModel.country
+            } else {
+                ""
+            }
         Text(
-            text = "${weatherInfoModel.region}, ${weatherInfoModel.country}",
+            text = regionText,
             modifier = Modifier.constrainAs(region) {
                 linkTo(
                     top = location.bottom,
@@ -73,6 +84,7 @@ fun LocationPopUpContent(
                     verticalBias = 0.0f,
                     horizontalBias = 0.0f
                 )
+                visibility = if (regionText.isEmpty()) Visibility.Invisible else Visibility.Visible
                 width = Dimension.fillToConstraints
             },
             fontSize = 14.sp,

@@ -38,12 +38,17 @@ fun LocationInfoContent(
             text = location,
             color = Color.White
         )
-        val regionText = if (region.isNotEmpty()) {
-            "$region,"
-        } else {
-            ""
-        }
-        if (!(country.isEmpty() && regionText.isEmpty())) {
+        val regionText =
+            if (region.isEmpty() && country.isEmpty()) {
+                "$region, $country"
+            } else if (region.isEmpty()) {
+                region
+            } else if (country.isEmpty()) {
+                country
+            } else {
+                ""
+            }
+        if (region.isNotEmpty()) {
             Text(
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp)

@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 
 /**
@@ -30,8 +31,33 @@ class LocationSelectionViewModel : BaseViewModel<LocationSelectionDataType>() {
     var weatherInfoModel by mutableStateOf(WeatherInfoModel())
         private set
     var latLng by mutableStateOf<LatLng?>(null)
-    var job: Job? = null
+    private var job: Job? = null
 
+    /**
+     * Fetches and processes weather information for the specified LatLng coordinates.
+     *
+     * This function cancels any existing job ([job]) and
+     * launches a new coroutine to collect weather information
+     * from the repository's [getWeatherInfo] flow.
+     *
+     * It handles different data states and UI events:
+     * - [DataStateEnum.OperationStart]:
+     *   Resets the [weatherInfoModel] and [latLng] properties,
+     *   and sets a [UiEvent]to hide any existing alerts.
+     * - [DataStateEnum.NoNetworkConnection]:
+     *   Calls [showNoInternetAlert] to display a "no internet" alert.
+     * - [DataStateEnum.NetworkSuccess]:
+     *   If network data is successfully retrieved and there are no errors,
+     *   it converts the data to a [WeatherInfoModel],
+     *   updates the ViewModel's properties,
+     *   and sets a [UiEvent] to show an alert with the weather information.
+     *   If there's an error in the response,
+     *   it sets a [UiEvent] to show a toast message.
+     *
+     * The coroutine is launched in the [viewModelScope].
+     *
+     * @param latLng The LatLng coordinates for which to fetch weather information.
+     */
     fun getWeatherInfo(latLng: LatLng) {
         job?.cancel()
         job = defaultScope.launch {
@@ -85,6 +111,18 @@ class LocationSelectionViewModel : BaseViewModel<LocationSelectionDataType>() {
         }
     }
 
+    /**
+     * Adds the current weather information as a new location to the repository.
+     *
+     * This function launches a coroutine that performs the following steps:
+     * 1. Converts the [weatherInfoModel] to a [WeatherEntity].
+     * 2. Calls the [repository.addLocation] function to add the entity
+     *    to the data store.
+     * 3. Sets a [UiEvent] to trigger the opening of a new screen
+     *    (presumably to display the added location).
+     *
+     * The coroutine is launched in the [defaultScope].
+     */
     fun addLocation() {
         defaultScope.launch {
             val weatherEntity = weatherInfoModel.convertToWeatherEntity()
