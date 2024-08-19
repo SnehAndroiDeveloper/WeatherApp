@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="google_api_key">AIzaSyCrZ6naPGINy20JOwsEiEK095Jn0vWfMrg</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="humidity">Humidity</string>
+    <string name="uv_index">UV index</string>
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="degree_centigrade">°C</string>
+    <string name="feels_like">Feels like</string>
+    <string name="wind_speed">km/h</string>
+    <string name="pressure_unit">mb</string>
+    <string name="percentage">%</string>
+    <string name="error_message">We are currently facing some problem.\n Please try to connect after sometime!</string>
+    <string name="no_weather_info_error">Weather information is not available for the selected location!</string>
+    <string name="last_updated_error">Internet is not available! Last updated on :</string>
+    <string name="ok">OK</string>
+    <string name="no_network_available">Internet connection is not available. Please connect to internet and try again!</string>
+    <string name="select_location">Please select your location from the map to proceed</string>
+</resources>
