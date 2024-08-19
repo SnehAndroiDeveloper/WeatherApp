@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -34,7 +33,7 @@ fun LocationInfoContent(
         Text(
             modifier = Modifier.fillMaxWidth(),
             fontWeight = FontWeight.Medium,
-            fontSize = 20.sp,
+            fontSize = 18.sp,
             textAlign = TextAlign.Center,
             text = location,
             color = Color.White
@@ -47,10 +46,10 @@ fun LocationInfoContent(
         if (!(country.isEmpty() && regionText.isEmpty())) {
             Text(
                 modifier = Modifier
-                    .padding(horizontal = 10.dp, vertical = 3.dp)
+                    .padding(start = 10.dp, end = 10.dp)
                     .fillMaxWidth(),
                 fontWeight = FontWeight.Normal,
-                fontSize = 14.sp,
+                fontSize = 12.sp,
                 color = Color.White,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,

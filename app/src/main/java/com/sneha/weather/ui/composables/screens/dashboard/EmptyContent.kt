@@ -2,6 +2,7 @@ package com.sneha.weather.ui.composables.screens.dashboard
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,9 +25,9 @@ import com.sneha.weather.R
  * Created by Sneha on 16-08-2024.
  */
 @Composable
-fun EmptyContent() {
+fun EmptyContent(paddingValues : PaddingValues) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.padding(paddingValues).fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -51,5 +52,5 @@ fun EmptyContent() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewEmptyContent() {
-    EmptyContent()
+    EmptyContent(paddingValues = PaddingValues())
 }
