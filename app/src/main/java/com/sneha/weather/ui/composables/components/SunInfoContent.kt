@@ -54,7 +54,7 @@ fun SunInfoContent(
     ) {
         Icon(
             modifier = Modifier
-                .size(48.dp)
+                .size(42.dp)
                 .padding(top = 10.dp)
                 .align(Alignment.CenterHorizontally),
             painter = painterResource(id = iconId),
@@ -65,7 +65,7 @@ fun SunInfoContent(
                 .padding(horizontal = 10.dp, vertical = 5.dp)
                 .fillMaxWidth(),
             fontWeight = FontWeight.Normal,
-            fontSize = 20.sp,
+            fontSize = 14.sp,
             textAlign = TextAlign.Center,
             text = title.uppercase()
         )
@@ -74,7 +74,7 @@ fun SunInfoContent(
                 .padding(bottom = 10.dp, start = 10.dp, end = 10.dp)
                 .fillMaxWidth(),
             fontWeight = FontWeight.Medium,
-            fontSize = 20.sp,
+            fontSize = 18.sp,
             textAlign = TextAlign.Center,
             text = value
         )

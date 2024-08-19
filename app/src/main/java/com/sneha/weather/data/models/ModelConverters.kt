@@ -1,6 +1,5 @@
 package com.sneha.weather.data.models
 
-import com.google.android.gms.maps.model.LatLng
 import com.sneha.local_db.models.WeatherEntity
 import com.sneha.weather.data.datasource.network.models.response.weather_info.WeatherInfoResponseModel
 import com.sneha.weather.data.enums.DayOrNightEnum
@@ -24,8 +23,8 @@ fun WeatherInfoResponseModel.convertToWeatherInfoModel(): WeatherInfoModel {
         windSpeed = this.current?.wind_speed ?: 0,
         localTime = this.location?.localtime.orEmpty(),
         weatherIconURL = this.current?.weather_icons?.firstOrNull().orEmpty(),
-        sunSetTime = "6:10 PM",
-        sunRiseTime = "5:32 AM",
+        sunSetTime = this.sunSet,
+        sunRiseTime = this.sunRise,
         latitude = this.location?.lat.orEmpty(),
         longitude = this.location?.lon.orEmpty()
     )
@@ -49,8 +48,8 @@ fun WeatherInfoResponseModel.convertToWeatherEntity(): WeatherEntity {
         uvIndex = this.current?.uv_index ?: 0,
         windSpeed = this.current?.wind_speed ?: 0,
         weatherIcon = this.current?.weather_icons?.firstOrNull().orEmpty(),
-        sunset = "6:10 PM",
-        sunrise = "5:32 AM"
+        sunset = this.sunSet,
+        sunrise = this.sunRise
     )
     return weatherEntity
 }
@@ -70,8 +69,8 @@ fun WeatherEntity.convertToWeatherInfoModel(): WeatherInfoModel {
         windSpeed = this.windSpeed,
         localTime = this.localtime,
         weatherIconURL = this.weatherIcon,
-        sunSetTime = "6:10 PM",
-        sunRiseTime = "5:32 AM",
+        sunSetTime = this.sunset,
+        sunRiseTime = this.sunrise,
         latitude = this.latitude,
         longitude = this.longitude
     )

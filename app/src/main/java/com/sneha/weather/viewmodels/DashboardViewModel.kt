@@ -4,11 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.maps.model.LatLng
 import com.sneha.local_db.models.WeatherEntity
 import com.sneha.weather.data.data_type.DashboardDataType
 import com.sneha.weather.data.datasource.network.models.response.weather_info.WeatherInfoResponseModel
-import com.sneha.weather.data.datasource.pref.WeatherPreferences
 import com.sneha.weather.data.datasource.repositories.DashboardRepository
 import com.sneha.weather.data.enums.DataStateEnum
 import com.sneha.weather.data.enums.UiStateEnum
@@ -69,7 +67,7 @@ class DashboardViewModel : BaseViewModel<DashboardDataType>() {
                                 }
                             }
 
-                            DataStateEnum.NetworkSuccess -> {
+                            DataStateEnum.OperationEnd -> {
                                 if (it.data is WeatherInfoResponseModel) {
                                     val weatherInfoModel = it.data.convertToWeatherInfoModel()
                                     this@DashboardViewModel.weatherInfoModel = weatherInfoModel

@@ -8,5 +8,7 @@ data class WeatherInfoResponseModel(
     val success: Boolean? = false,
     val current: Current? = Current(),
     val location: Location? = Location(),
-    val request: Request? = Request()
+    val request: Request? = Request(),
+    var sunRise: String = "",
+    var sunSet: String = ""
 )
