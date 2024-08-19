@@ -29,23 +29,29 @@ class DashboardViewModel : BaseViewModel<DashboardDataType>() {
         private set
 
     /**
-     * Fetches and processes weather information for the given
-     * @param latitude and
-     * @param longitude of the location.
+     * Fetches and processes weather information for the specified latitude and longitude.
      *
      * This function launches a coroutine
      * to collect weather information from the repository's [getCurrentLocationWeatherInfo] flow.
      * It handles different data states and UI events:
      * - [DataStateEnum.DBConnectionEnd]:
      *      If data is available from the database,
-     *      it converts it to a [WeatherInfoModel] and updates the ViewModel's [weatherInfoModel].
-     *      If no details found, it sets a [UiEvent] to show an empty screen.
-     * - [DataStateEnum.NetworkSuccess]:
-     *      If network data is successfully retrieved,
-     *      it converts it to a [WeatherInfoModel], updates the ViewModel's [weatherInfoModel],
+     *      it converts it to a [WeatherInfoModel] and
+     *      updates the ViewModel's [weatherInfoModel].
+     *      If no data is found, it sets a [UiEvent] to show an empty screen.
+     * - [DataStateEnum.OperationEnd]:
+     *      If the operation completes successfully (with or without network data),
+     *      it converts the result to a [WeatherInfoModel],
+     *      updates the ViewModel's [weatherInfoModel],
      *      and sets a [UiEvent] to show the content.
      * - [DataStateEnum.NoNetworkConnection]:
-     *      If there's no network connection, it calls [showNoInternetAlert].
+     *      If there's no network connection,
+     *      it calls [showNoInternetAlert].
+     *
+     * The coroutine is launched in the [viewModelScope].
+     *
+     * @param latitude The latitude coordinate.
+     * @param longitude The longitude coordinate.
      */
     fun getWeatherInfo(latitude: String, longitude: String) {
         defaultScope.launch {
