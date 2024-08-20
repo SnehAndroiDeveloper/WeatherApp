@@ -185,7 +185,7 @@ fun LocationSelectionScreen(
                     }
                 }
             }
-            LocationMapContent(viewModel)
+            LocationMapContent(viewModel, mapProperties)
         }
     }
 }
