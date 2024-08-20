@@ -39,11 +39,11 @@ fun LocationInfoContent(
             color = Color.White
         )
         val regionText =
-            if (region.isEmpty() && country.isEmpty()) {
+            if (region.isNotEmpty() && country.isNotEmpty()) {
                 "$region, $country"
-            } else if (region.isEmpty()) {
+            } else if (region.isNotEmpty()) {
                 region
-            } else if (country.isEmpty()) {
+            } else if (country.isNotEmpty()) {
                 country
             } else {
                 ""
@@ -59,7 +59,7 @@ fun LocationInfoContent(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,
-                text = "$regionText $country"
+                text = regionText
             )
         }
     }

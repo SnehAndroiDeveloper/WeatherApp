@@ -61,11 +61,11 @@ fun LocationPopUpContent(
             color = Color.Black
         )
         val regionText =
-            if (weatherInfoModel.region.isEmpty() && weatherInfoModel.country.isEmpty()) {
+            if (weatherInfoModel.region.isNotEmpty() && weatherInfoModel.country.isNotEmpty()) {
                 "${weatherInfoModel.region}, ${weatherInfoModel.country}"
-            } else if (weatherInfoModel.region.isEmpty()) {
+            } else if (weatherInfoModel.region.isNotEmpty()) {
                 weatherInfoModel.region
-            } else if (weatherInfoModel.country.isEmpty()) {
+            } else if (weatherInfoModel.country.isNotEmpty()) {
                 weatherInfoModel.country
             } else {
                 ""
