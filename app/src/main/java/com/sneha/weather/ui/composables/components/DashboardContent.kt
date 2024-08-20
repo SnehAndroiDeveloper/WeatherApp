@@ -1,4 +1,4 @@
-package com.sneha.weather.ui.composables.screens.dashboard
+package com.sneha.weather.ui.composables.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,8 +15,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sneha.weather.R
-import com.sneha.weather.ui.composables.components.SunInfoContent
-import com.sneha.weather.ui.composables.components.TemperatureInfoContent
 import com.sneha.weather.ui.theme.BlackBackground
 import com.sneha.weather.ui.theme.BlueBackground
 import com.sneha.weather.viewmodels.DashboardViewModel

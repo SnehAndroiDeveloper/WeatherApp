@@ -44,14 +44,12 @@ class LocationSelectionRepository : BaseRepository() {
     }
 
     suspend fun addLocation(weatherEntity: WeatherEntity) {
-        WeatherApplication.instance?.applicationContext?.let {
-            WeatherPreferences.save(
-                it, PreferenceKeys.PREF_LATITUDE, weatherEntity.latitude
-            )
-            WeatherPreferences.save(
-                it, PreferenceKeys.PREF_LONGITUDE, weatherEntity.longitude
-            )
-        }
+        WeatherPreferences.save(
+            PreferenceKeys.PREF_LATITUDE, weatherEntity.latitude
+        )
+        WeatherPreferences.save(
+            PreferenceKeys.PREF_LONGITUDE, weatherEntity.longitude
+        )
         dbController.insertWeatherEntity(weatherEntity)
     }
 }

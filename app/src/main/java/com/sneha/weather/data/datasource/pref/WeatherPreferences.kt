@@ -3,6 +3,8 @@ package com.sneha.weather.data.datasource.pref
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionScheme
+import androidx.security.crypto.MasterKey
 import androidx.security.crypto.MasterKeys
 
 /**
@@ -10,34 +12,39 @@ import androidx.security.crypto.MasterKeys
  */
 object WeatherPreferences {
     private const val PREFS_FILE_NAME = "weather_secure_prefs"
+    private lateinit var application: Context
 
-    fun getSharedPreferences(context: Context): SharedPreferences {
-        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+    fun init(context: Context) {
+        application = context.applicationContext
+    }
+
+    fun getSharedPreferences(): SharedPreferences {
+        val masterKeyAlias =
+            MasterKey.Builder(application).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
         return EncryptedSharedPreferences.create(
+            application,
             PREFS_FILE_NAME,
             masterKeyAlias,
-            context,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
 
-    fun save(context: Context, key: String, value: Any) {
-        val sharedPreferences = getSharedPreferences(context)
+    fun save(key: String, value: Any) {
+        val sharedPreferences = getSharedPreferences()
         val editor = sharedPreferences.edit()
         when (value) {
             is String -> editor.putString(key, value)
-            is Boolean -> editor.putBoolean(key, value)
             is Long -> editor.putLong(key, value)
-            is Float -> editor.putFloat(key, value)
             is Int -> editor.putInt(key, value)
-            else -> throw IllegalArgumentException("Unsupported value type")
+            is Boolean -> editor.putBoolean(key, value)
+            is Float -> editor.putFloat(key, value)
         }
         editor.apply()
     }
 
-    inline fun <reified T> get(context: Context, key: String, defaultValue: T): T {
-        val sharedPreferences = getSharedPreferences(context)
+    inline fun <reified T> get(key: String, defaultValue: T): T {
+        val sharedPreferences = getSharedPreferences()
         return when (defaultValue) {
             is String -> sharedPreferences.getString(key, defaultValue) as T
             is Boolean -> sharedPreferences.getBoolean(key, defaultValue) as T

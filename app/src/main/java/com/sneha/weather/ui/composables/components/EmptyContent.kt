@@ -1,4 +1,4 @@
-package com.sneha.weather.ui.composables.screens.dashboard
+package com.sneha.weather.ui.composables.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

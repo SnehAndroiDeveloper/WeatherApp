@@ -4,10 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.google.android.gms.maps.model.LatLng
-import com.sneha.weather.navigation.NavigationArgumentsConstants
 import com.sneha.weather.navigation.NavigationDestination
-import com.sneha.weather.ui.composables.navigations.handler.OnBoardClickHandler
+import com.sneha.weather.ui.composables.navigations.handler.LocationSelectionClickHandler
 import com.sneha.weather.ui.composables.screens.dashboard.WeatherDashboardScreen
 import com.sneha.weather.ui.composables.navigations.handler.WeatherDashboardClickHandler
 import com.sneha.weather.ui.composables.screens.location_selection.LocationSelectionScreen
@@ -26,7 +24,7 @@ fun WeatherAppNavigator(navController: NavHostController, destination: Navigatio
         composable(NavigationDestination.LocationSelection.fullRoute) {
             val viewModel = viewModel<LocationSelectionViewModel>()
             LocationSelectionScreen(viewModel) { event ->
-                OnBoardClickHandler().onClick(event, navController)
+                LocationSelectionClickHandler().onClick(event, navController)
             }
         }
 

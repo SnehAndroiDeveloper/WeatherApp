@@ -28,7 +28,6 @@ fun LocationMapContent(viewModel: LocationSelectionViewModel) {
     }
     GoogleMap(
         modifier = Modifier
-            .padding(top = 10.dp)
             .fillMaxSize()
             .clip(RoundedCornerShape(8.dp)),
         cameraPositionState = cameraPositionState,

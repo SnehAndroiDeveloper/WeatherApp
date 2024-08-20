@@ -26,7 +26,10 @@ import com.sneha.weather.data.datasource.pref.PreferenceKeys
 import com.sneha.weather.data.datasource.pref.WeatherPreferences
 import com.sneha.weather.data.enums.UiStateEnum
 import com.sneha.weather.events.DashboardClickEvents
+import com.sneha.weather.ui.composables.components.DashboardContent
+import com.sneha.weather.ui.composables.components.EmptyContent
 import com.sneha.weather.ui.composables.components.LocationInfoContent
+import com.sneha.weather.ui.composables.components.NoInternetContent
 import com.sneha.weather.ui.theme.BlackBackground
 import com.sneha.weather.ui.theme.BlueBackground
 import com.sneha.weather.ui.theme.CardBackground
@@ -42,7 +45,6 @@ fun WeatherDashboardScreen(
     viewModel: DashboardViewModel,
     onClick: (DashboardClickEvents) -> Unit
 ) {
-    val context = LocalContext.current
     var showEmptyScreen by rememberSaveable { mutableStateOf(false) }
     val snackBarState = remember {
         SnackbarHostState()
@@ -68,10 +70,10 @@ fun WeatherDashboardScreen(
 
     LifecycleEventEffect(event = Lifecycle.Event.ON_CREATE) {
         val latitude = WeatherPreferences.get(
-            context, PreferenceKeys.PREF_LATITUDE, ""
+            PreferenceKeys.PREF_LATITUDE, ""
         )
         val longitude = WeatherPreferences.get(
-            context, PreferenceKeys.PREF_LONGITUDE, ""
+            PreferenceKeys.PREF_LONGITUDE, ""
         )
         viewModel.getWeatherInfo(latitude, longitude)
     }

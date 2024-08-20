@@ -1,20 +1,20 @@
 package com.sneha.weather.ui.composables.navigations.handler
 
 import androidx.navigation.NavHostController
-import com.sneha.weather.events.OnBoardClickEvents
+import com.sneha.weather.events.LocationSelectionClickEvents
 import com.sneha.weather.navigation.NavigationDestination
 
 /**
  * Created by Sneha on 15-08-2024.
  */
-class OnBoardClickHandler {
+class LocationSelectionClickHandler {
 
     internal fun onClick(
-        event: OnBoardClickEvents,
+        event: LocationSelectionClickEvents,
         navController: NavHostController
     ) {
         when (event) {
-            OnBoardClickEvents.OpenDashboard -> {
+            LocationSelectionClickEvents.OpenDashboard -> {
                 navController.navigate(
                     NavigationDestination.WeatherDashboard.fullRoute
                 ) {
@@ -22,6 +22,10 @@ class OnBoardClickHandler {
                         inclusive = true
                     }
                 }
+            }
+
+            LocationSelectionClickEvents.OnBackClick -> {
+                navController.popBackStack()
             }
         }
     }

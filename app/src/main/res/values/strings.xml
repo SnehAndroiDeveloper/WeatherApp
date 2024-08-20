@@ -17,5 +17,10 @@
     <string name="last_updated_error">Internet is not available! Last updated on :</string>
     <string name="ok">OK</string>
     <string name="no_network_available">Internet connection is not available. Please connect to internet and try again!</string>
-    <string name="select_location">Please select your location from the map to proceed</string>
+    <string name="select_location">Select your location to proceed</string>
+    <string name="location_service_is_off">Location services is off.</string>
+    <string name="allow_location_permission_title">Weather application works best with Location Services turned on.</string>
+    <string name="allow_location_permission_message">You\’ll get automatic location detection for yours, accurate GPS tracking and improved search results when you turn on Location Services for Weather application.</string>
+    <string name="allow_location_permission_positive_text">Turn On in Settings</string>
+    <string name="allow_location_permission_negative_text">Keep Location Services off</string>
 </resources>

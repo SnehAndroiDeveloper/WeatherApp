@@ -1,6 +1,7 @@
 package com.sneha.weather
 
 import android.app.Application
+import com.sneha.weather.data.datasource.pref.WeatherPreferences
 
 /**
  * Created by Sneha on 15-08-2024.
@@ -13,5 +14,6 @@ class WeatherApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        WeatherPreferences.init(this.applicationContext)
     }
 }

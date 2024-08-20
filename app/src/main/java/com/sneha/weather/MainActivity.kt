@@ -17,11 +17,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherTheme {
-              val destination =  if (WeatherPreferences.get(this, PreferenceKeys.PREF_LATITUDE, "").isNotEmpty()){
-                    NavigationDestination.WeatherDashboard
-                }else{
-                    NavigationDestination.LocationSelection
-                }
+                val destination =
+                    if (WeatherPreferences.get(PreferenceKeys.PREF_LATITUDE, "").isNotEmpty()) {
+                        NavigationDestination.WeatherDashboard
+                    } else {
+                        NavigationDestination.LocationSelection
+                    }
                 val navController = rememberNavController()
                 WeatherAppNavigator(navController = navController, destination)
             }
