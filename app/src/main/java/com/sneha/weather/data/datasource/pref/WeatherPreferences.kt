@@ -5,13 +5,12 @@ import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionScheme
 import androidx.security.crypto.MasterKey
-import androidx.security.crypto.MasterKeys
 
 /**
  * Created by Sneha on 19-08-2024.
  */
 object WeatherPreferences {
-    private const val PREFS_FILE_NAME = "weather_secure_prefs"
+    private const val PREFS_FILE_NAME = "secret_weather_pref"
     private lateinit var application: Context
 
     fun init(context: Context) {

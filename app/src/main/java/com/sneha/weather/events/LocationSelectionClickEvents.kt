@@ -5,5 +5,4 @@ package com.sneha.weather.events
  */
 sealed class LocationSelectionClickEvents {
     data object OpenDashboard : LocationSelectionClickEvents()
-    data object OnBackClick : LocationSelectionClickEvents()
 }

@@ -23,10 +23,6 @@ class LocationSelectionClickHandler {
                     }
                 }
             }
-
-            LocationSelectionClickEvents.OnBackClick -> {
-                navController.popBackStack()
-            }
         }
     }
 }

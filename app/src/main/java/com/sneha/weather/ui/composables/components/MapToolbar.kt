@@ -9,7 +9,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.sneha.weather.R
-import com.sneha.weather.events.LocationSelectionClickEvents
 import com.sneha.weather.ui.theme.BackgroundColor
 import com.sneha.weather.ui.theme.BlueBackground
 import com.sneha.weather.ui.theme.Typography
@@ -32,7 +30,7 @@ import com.sneha.weather.ui.theme.Typography
 fun MapToolbar(
     isLocationPermissionEnabled: Boolean,
     askLocationPermission: () -> Unit,
-    onClick: (LocationSelectionClickEvents) -> Unit,
+    onBackClick: () -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -49,9 +47,7 @@ fun MapToolbar(
             )
             start.linkTo(parent.start)
             end.linkTo(title.start, margin = 5.dp)
-        }, onClick = {
-            onClick(LocationSelectionClickEvents.OnBackClick)
-        }) {
+        }, onClick = onBackClick) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow_left),
                 contentDescription = "Back",

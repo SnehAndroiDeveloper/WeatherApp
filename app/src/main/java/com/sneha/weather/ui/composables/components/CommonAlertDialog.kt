@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
 import com.sneha.weather.ui.theme.Typography
 
 /**
@@ -27,6 +28,7 @@ fun CommonAlertDialog(
 ) {
     AlertDialog(
         modifier = modifier.width(400.dp),
+        properties = DialogProperties(dismissOnClickOutside = false),
         containerColor = Color.White,
         title = {
             if (dialogTitle != null) {
@@ -53,7 +55,7 @@ fun CommonAlertDialog(
             ) {
                 Text(
                     positiveText,
-                    style = Typography.titleLarge.merge(fontWeight = FontWeight.SemiBold)
+                    style = Typography.titleMedium.merge(fontWeight = FontWeight.SemiBold)
                 )
             }
         },
@@ -66,7 +68,7 @@ fun CommonAlertDialog(
                 ) {
                     Text(
                         negativeText,
-                        style = Typography.titleLarge
+                        style = Typography.titleMedium
                     )
                 }
             }

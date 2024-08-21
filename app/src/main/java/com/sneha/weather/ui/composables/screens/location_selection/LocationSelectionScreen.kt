@@ -28,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
@@ -37,6 +36,7 @@ import com.google.maps.android.compose.MapType
 import com.sneha.weather.R
 import com.sneha.weather.data.enums.UiStateEnum
 import com.sneha.weather.data.enums.UserState
+import com.sneha.weather.data.utils.findActivity
 import com.sneha.weather.data.utils.goToAppSetting
 import com.sneha.weather.events.LocationPopUpClickEvents
 import com.sneha.weather.events.LocationSelectionClickEvents
@@ -162,12 +162,13 @@ fun LocationSelectionScreen(
             }
             MapToolbar(
                 isLocationPermissionEnabled = hasLocationPermission,
-                onClick = onClick,
                 askLocationPermission = {
                     locationPermissionLauncher.launch(
                         Manifest.permission.ACCESS_FINE_LOCATION
                     )
-                })
+                }) {
+                context.findActivity()?.finish()
+            }
 
             AnimatedVisibility(
                 enter = slideInVertically(),
