@@ -6,11 +6,12 @@ import com.sneha.weather.data.datasource.network.constants.EndPointConstants
 import com.sneha.weather.data.datasource.network.constants.ParameterConstants
 import com.sneha.weather.data.datasource.network.constants.URLConstants
 import com.sneha.weather.data.datasource.network.models.response.weather_info.WeatherInfoResponseModel
+import javax.inject.Inject
 
 /**
  * Created by Sneha on 15-08-2024.
  */
-class WeatherInfoNetworkController : BaseNetworkController(URLConstants.WEATHER_INFO_BASE_URL) {
+class WeatherInfoNetworkController @Inject constructor() : BaseNetworkController(URLConstants.WEATHER_INFO_BASE_URL) {
 
     /**
      * Retrieves current weather information for the specified query.

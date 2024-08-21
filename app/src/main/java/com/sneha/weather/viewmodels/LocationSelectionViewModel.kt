@@ -14,6 +14,7 @@ import com.sneha.weather.data.events.UiEvent
 import com.sneha.weather.data.models.WeatherInfoModel
 import com.sneha.weather.data.models.convertToWeatherEntity
 import com.sneha.weather.data.models.convertToWeatherInfoModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,12 +22,16 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Created by Sneha on 18-08-2024.
  */
-class LocationSelectionViewModel : BaseViewModel<LocationSelectionDataType>() {
-    private val repository by lazy { LocationSelectionRepository() }
+@HiltViewModel
+class LocationSelectionViewModel @Inject constructor() :
+    BaseViewModel<LocationSelectionDataType>() {
+    @Inject
+    lateinit var repository: LocationSelectionRepository
     private val defaultScope by lazy { CoroutineScope(Dispatchers.Default) }
     var weatherInfoModel by mutableStateOf(WeatherInfoModel())
         private set

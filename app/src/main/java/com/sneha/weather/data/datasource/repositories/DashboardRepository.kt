@@ -12,14 +12,20 @@ import com.sneha.weather.data.models.convertToWeatherEntity
 import com.sneha.weather.data.utils.convertDateToTimeFormat
 import com.sneha.weather.data.utils.toDate
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 /**
  * Created by Sneha on 15-08-2024.
  */
-class DashboardRepository : BaseRepository() {
-    private val weatherInfoNetworkController by lazy { WeatherInfoNetworkController() }
-    private val sunInfoNetworkController by lazy { SunInfoNetworkController() }
-    private val dbController by lazy { WeatherDBController() }
+class DashboardRepository @Inject constructor() : BaseRepository() {
+    @Inject
+    lateinit var weatherInfoNetworkController: WeatherInfoNetworkController
+
+    @Inject
+    lateinit var sunInfoNetworkController: SunInfoNetworkController
+
+    @Inject
+    lateinit var dbController: WeatherDBController
 
     /**
      * Retrieves and emits current weather information for the specified latitude and longitude as a flow,
@@ -69,7 +75,8 @@ class DashboardRepository : BaseRepository() {
             weatherInfoNetworkController,
             this,
             result,
-            DashboardDataType.FetchCurrentWeather) { response ->
+            DashboardDataType.FetchCurrentWeather
+        ) { response ->
             response?.let {
                 if (it.error == null) {
                     weatherInfoResponseModel = it

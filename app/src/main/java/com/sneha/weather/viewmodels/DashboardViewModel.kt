@@ -7,23 +7,33 @@ import androidx.lifecycle.viewModelScope
 import com.sneha.local_db.models.WeatherEntity
 import com.sneha.weather.data.data_type.DashboardDataType
 import com.sneha.weather.data.datasource.network.models.response.weather_info.WeatherInfoResponseModel
+import com.sneha.weather.data.datasource.pref.PreferenceKeys
+import com.sneha.weather.data.datasource.pref.WeatherPreferences
 import com.sneha.weather.data.datasource.repositories.DashboardRepository
 import com.sneha.weather.data.enums.DataStateEnum
 import com.sneha.weather.data.enums.UiStateEnum
 import com.sneha.weather.data.events.UiEvent
 import com.sneha.weather.data.models.WeatherInfoModel
 import com.sneha.weather.data.models.convertToWeatherInfoModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Created by Sneha on 15-08-2024.
  */
-class DashboardViewModel : BaseViewModel<DashboardDataType>() {
-    private val repository by lazy { DashboardRepository() }
+@HiltViewModel
+class DashboardViewModel @Inject constructor() : BaseViewModel<DashboardDataType>() {
+    @Inject
+    lateinit var repository: DashboardRepository
+
+    @Inject
+    lateinit var weatherPreferences: WeatherPreferences
+
     private val defaultScope by lazy { CoroutineScope(Dispatchers.Default) }
     var weatherInfoModel by mutableStateOf(WeatherInfoModel())
         private set
@@ -50,11 +60,15 @@ class DashboardViewModel : BaseViewModel<DashboardDataType>() {
      *
      * The coroutine is launched in the [viewModelScope].
      *
-     * @param latitude The latitude coordinate.
-     * @param longitude The longitude coordinate.
      */
-    fun getWeatherInfo(latitude: String, longitude: String) {
+    fun getWeatherInfo() {
         defaultScope.launch {
+            val latitude = weatherPreferences.get(
+                PreferenceKeys.PREF_LATITUDE, ""
+            )
+            val longitude = weatherPreferences.get(
+                PreferenceKeys.PREF_LONGITUDE, ""
+            )
             repository.getCurrentLocationWeatherInfo(latitude, longitude)
                 .onEach {
                     if (it.dataType == DashboardDataType.FetchCurrentWeather) {

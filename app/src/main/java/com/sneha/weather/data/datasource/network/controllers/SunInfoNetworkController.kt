@@ -6,11 +6,13 @@ import com.sneha.weather.data.datasource.network.constants.EndPointConstants
 import com.sneha.weather.data.datasource.network.constants.ParameterConstants
 import com.sneha.weather.data.datasource.network.constants.URLConstants
 import com.sneha.weather.data.datasource.network.models.response.sun_info.SunInfoResponseModel
+import javax.inject.Inject
 
 /**
  * Created by Sneha on 15-08-2024.
  */
-class SunInfoNetworkController : BaseNetworkController(URLConstants.SUN_INFO_BASE_URL) {
+class SunInfoNetworkController @Inject constructor() :
+    BaseNetworkController(URLConstants.SUN_INFO_BASE_URL) {
 
     /**
      * Retrieves sunrise and sunset information for the specified latitude and longitude.

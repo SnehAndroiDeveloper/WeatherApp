@@ -9,6 +9,7 @@ import androidx.security.crypto.MasterKey
 /**
  * Created by Sneha on 19-08-2024.
  */
+
 object WeatherPreferences {
     private const val PREFS_FILE_NAME = "secret_weather_pref"
     private lateinit var application: Context

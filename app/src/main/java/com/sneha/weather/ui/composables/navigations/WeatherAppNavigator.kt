@@ -1,13 +1,12 @@
 package com.sneha.weather.ui.composables.navigations
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.sneha.weather.navigation.NavigationDestination
 import com.sneha.weather.ui.composables.navigations.handler.LocationSelectionClickHandler
 import com.sneha.weather.ui.composables.screens.dashboard.WeatherDashboardScreen
-import com.sneha.weather.ui.composables.navigations.handler.WeatherDashboardClickHandler
 import com.sneha.weather.ui.composables.screens.location_selection.LocationSelectionScreen
 import com.sneha.weather.viewmodels.DashboardViewModel
 import com.sneha.weather.viewmodels.LocationSelectionViewModel
@@ -22,17 +21,15 @@ fun WeatherAppNavigator(navController: NavHostController, destination: Navigatio
         startDestination = destination
     ) {
         composable(NavigationDestination.LocationSelection.fullRoute) {
-            val viewModel = viewModel<LocationSelectionViewModel>()
+            val viewModel = hiltViewModel<LocationSelectionViewModel>()
             LocationSelectionScreen(viewModel) { event ->
                 LocationSelectionClickHandler().onClick(event, navController)
             }
         }
 
         composable(NavigationDestination.WeatherDashboard.fullRoute) {
-            val viewModel = viewModel<DashboardViewModel>()
-            WeatherDashboardScreen(viewModel) { event ->
-                WeatherDashboardClickHandler().onClick(event, navController)
-            }
+            val viewModel = hiltViewModel<DashboardViewModel>()
+            WeatherDashboardScreen(viewModel)
         }
     }
 }

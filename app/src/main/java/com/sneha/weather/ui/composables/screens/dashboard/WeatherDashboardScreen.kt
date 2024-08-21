@@ -17,15 +17,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
-import com.sneha.weather.data.datasource.pref.PreferenceKeys
-import com.sneha.weather.data.datasource.pref.WeatherPreferences
 import com.sneha.weather.data.enums.UiStateEnum
-import com.sneha.weather.events.DashboardClickEvents
 import com.sneha.weather.ui.composables.components.DashboardContent
 import com.sneha.weather.ui.composables.components.EmptyContent
 import com.sneha.weather.ui.composables.components.LocationInfoContent
@@ -42,8 +38,7 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun WeatherDashboardScreen(
-    viewModel: DashboardViewModel,
-    onClick: (DashboardClickEvents) -> Unit
+    viewModel: DashboardViewModel
 ) {
     var showEmptyScreen by rememberSaveable { mutableStateOf(false) }
     val snackBarState = remember {
@@ -69,13 +64,7 @@ fun WeatherDashboardScreen(
     }
 
     LifecycleEventEffect(event = Lifecycle.Event.ON_CREATE) {
-        val latitude = WeatherPreferences.get(
-            PreferenceKeys.PREF_LATITUDE, ""
-        )
-        val longitude = WeatherPreferences.get(
-            PreferenceKeys.PREF_LONGITUDE, ""
-        )
-        viewModel.getWeatherInfo(latitude, longitude)
+        viewModel.getWeatherInfo()
     }
     if (viewModel.showNetworkAlert()) {
         coroutineScope.launch {
@@ -112,6 +101,6 @@ fun WeatherDashboardScreen(
 @Composable
 fun WeatherDashboardPreview() {
     WeatherTheme {
-        WeatherDashboardScreen(DashboardViewModel()) {}
+        WeatherDashboardScreen(DashboardViewModel())
     }
 }

@@ -1,8 +1,6 @@
 package com.sneha.weather.data.datasource.repositories
 
-import com.google.android.gms.maps.model.LatLng
 import com.sneha.local_db.models.WeatherEntity
-import com.sneha.weather.WeatherApplication
 import com.sneha.weather.data.data_type.LocationSelectionDataType
 import com.sneha.weather.data.datasource.local_db.controllers.WeatherDBController
 import com.sneha.weather.data.datasource.network.controllers.WeatherInfoNetworkController
@@ -11,13 +9,20 @@ import com.sneha.weather.data.datasource.pref.WeatherPreferences
 import com.sneha.weather.data.enums.DataStateEnum
 import com.sneha.weather.data.events.DataEvent
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 /**
  * Created by Sneha on 18-08-2024.
  */
-class LocationSelectionRepository : BaseRepository() {
-    private val networkController by lazy { WeatherInfoNetworkController() }
-    private val dbController by lazy { WeatherDBController() }
+class LocationSelectionRepository @Inject constructor() : BaseRepository() {
+    @Inject
+    lateinit var networkController: WeatherInfoNetworkController
+
+    @Inject
+    lateinit var dbController: WeatherDBController
+
+    @Inject
+    lateinit var weatherPreferences: WeatherPreferences
 
     suspend fun getWeatherInfo(latitude: Double, longitude: Double) = flow {
         emit(
@@ -44,10 +49,10 @@ class LocationSelectionRepository : BaseRepository() {
     }
 
     suspend fun addLocation(weatherEntity: WeatherEntity) {
-        WeatherPreferences.save(
+        weatherPreferences.save(
             PreferenceKeys.PREF_LATITUDE, weatherEntity.latitude
         )
-        WeatherPreferences.save(
+        weatherPreferences.save(
             PreferenceKeys.PREF_LONGITUDE, weatherEntity.longitude
         )
         dbController.insertWeatherEntity(weatherEntity)
