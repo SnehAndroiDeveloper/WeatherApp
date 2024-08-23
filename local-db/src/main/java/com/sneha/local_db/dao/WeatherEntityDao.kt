@@ -10,7 +10,7 @@ import com.sneha.local_db.models.WeatherEntity
  * Created by Sneha on 15-08-2024.
  */
 @Dao
-internal interface WeatherEntityDao {
+interface WeatherEntityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWeatherEntity(weatherEntity: WeatherEntity)
 

@@ -2,6 +2,7 @@
 coilCompose="2.7.0"
 compileSdk= "34"
 constraintlayoutComposeVersion="1.0.1"
+core="1.6.1"
 hiltNavigationCompose="1.2.0"
 mapsCompose="2.11.4"
 minSdk ="27"
@@ -23,13 +24,18 @@ composeBom = "2024.06.00"
 composeCompiler = "1.5.3"
 navigation = "2.7.7"
 lifecycle = "2.8.4"
+runner="1.6.2"
 securityCrypto="1.1.0-alpha06"
 hilt ="2.46"
+junitJupiter = "5.8.1"
 
 [libraries]
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutComposeVersion" }
+androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-rules = { module = "androidx.test:rules", version.ref = "core" }
+androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
 androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -60,6 +66,7 @@ androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navig
 androidx-navigation-compose = { group = "androidx.navigation",name = "navigation-compose", version.ref = "navigation" }
 lifecycle-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [bundles]
 retrofit = ["retrofit2", "logging-interceptor", "retrofit2-gson"]
