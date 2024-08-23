@@ -1,19 +1,27 @@
 package com.sneha.local_db
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sneha.local_db.dao.WeatherEntityDao
 import com.sneha.local_db.models.WeatherEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * Created by Sneha on 23-08-2024.
  */
+@RunWith(AndroidJUnit4::class)
 class WeatherEntityDaoTest {
+    @get:Rule
+    val instantExecutorRule = InstantTaskExecutorRule()
+
     private lateinit var weatherRoomDatabase: WeatherRoomDatabase
     private lateinit var weatherEntityDao: WeatherEntityDao
 

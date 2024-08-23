@@ -3,6 +3,7 @@ coilCompose="2.7.0"
 compileSdk= "34"
 constraintlayoutComposeVersion="1.0.1"
 core="1.6.1"
+coreTesting="2.2.0"
 hiltNavigationCompose="1.2.0"
 mapsCompose="2.11.4"
 minSdk ="27"
@@ -33,6 +34,7 @@ junitJupiter = "5.8.1"
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutComposeVersion" }
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-rules = { module = "androidx.test:rules", version.ref = "core" }
 androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
