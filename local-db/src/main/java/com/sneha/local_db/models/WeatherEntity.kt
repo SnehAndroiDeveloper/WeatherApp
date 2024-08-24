@@ -13,7 +13,6 @@ import androidx.room.PrimaryKey
     primaryKeys = ["latitude", "longitude"]
 )
 data class WeatherEntity(
-    val id: Int = 0,
     val temperature: Int,
     val feelsLike: Int,
     val latitude: String,

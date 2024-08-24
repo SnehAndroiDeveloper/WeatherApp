@@ -37,7 +37,6 @@ class WeatherEntityDaoTest {
     @Test
     fun insertWeatherEntity_expectedSingleWeatherEntity() = runBlocking {
         val weatherEntity = WeatherEntity(
-            id = 0,
             temperature = 27,
             feelsLike = 30,
             latitude = "22.56",
@@ -65,7 +64,6 @@ class WeatherEntityDaoTest {
     @Test
     fun insertWeatherEntity_expectedNoWeatherEntity() = runBlocking {
         val weatherEntity = WeatherEntity(
-            id = 0,
             temperature = 27,
             feelsLike = 30,
             latitude = "22.56",
