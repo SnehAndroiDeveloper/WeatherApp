@@ -7,6 +7,7 @@ import com.sneha.weather.data.datasource.pref.PreferenceKeys
 import com.sneha.weather.data.datasource.pref.WeatherPreferences
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
@@ -115,5 +116,11 @@ class LocationSelectionRepositoryTest {
         locationSelectionRepository.addLocation(weatherEntity)
         val result = dbController.getWeatherEntity("22.56", "88.56")
         assertEquals(weatherEntity, result)
+    }
+
+    @Test
+    fun getWeatherInfo_expectedWeatherInfoReturned() = runTest {
+        val result = locationSelectionRepository.getWeatherInfo(22.76, 88.12).toList()
+        assertEquals(3, result.size)
     }
 }

@@ -24,6 +24,21 @@ class LocationSelectionRepository @Inject constructor() : BaseRepository() {
     @Inject
     lateinit var weatherPreferences: WeatherPreferences
 
+    /**
+     * Fetches weather information for the specified latitude and longitude.
+     *
+     * This function emits a flow of [DataEvent] objects,
+     * representing the different states of the weather information fetching process.
+     * It first emits an [DataStateEnum.OperationStart] event,
+     * then fetches the current weather information from the network using [networkController].
+     * The result of the network call is then processed using [emitNetworkResult],
+     * which handles network success,failure, and no network connection scenarios.
+     * Finally, it emits an [DataStateEnum.OperationEnd] event.
+     *
+     * @param latitude The latitude coordinate.
+     * @param longitude The longitude coordinate.
+     * @return A flow of [DataEvent] objects.
+     */
     suspend fun getWeatherInfo(latitude: Double, longitude: Double) = flow {
         emit(
             DataEvent(
@@ -48,6 +63,14 @@ class LocationSelectionRepository @Inject constructor() : BaseRepository() {
         )
     }
 
+    /**
+     * Adds a new location to the weather data store.
+     *
+     * This function saves the latitude and longitude of the new location to shared preferences
+     * and inserts the weather entity into the database.
+     *
+     * @param weatherEntity The weather entity representing the new location.
+     */
     suspend fun addLocation(weatherEntity: WeatherEntity) {
         weatherPreferences.save(
             PreferenceKeys.PREF_LATITUDE, weatherEntity.latitude
